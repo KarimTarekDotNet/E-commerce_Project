@@ -7,6 +7,6 @@ namespace Ecom.Core.Entities.Product
         public string ImageName { get; set; } = null!;
         public int ProductId { get; set; }
 
-        public virtual Product Product { get; set; } = null!;
+        //public virtual Product Product { get; set; } = null!;
     }
 }

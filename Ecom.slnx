@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
+    <File Path=".gitignore" />
     <Project Path="Ecom.Api/Ecom.Api.csproj" />
     <Project Path="Ecom.Core/Ecom.Core.csproj" />
     <Project Path="Ecom.Infrastucture/Ecom.Infrastucture.csproj" />

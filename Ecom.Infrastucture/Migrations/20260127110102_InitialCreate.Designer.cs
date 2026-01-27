@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecom.Infrastucture.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260127084755_initial")]
-    partial class initial
+    [Migration("20260127110102_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,6 +75,14 @@ namespace Ecom.Infrastucture.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Photos", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 3,
+                            ImageName = "test",
+                            ProductId = 1
+                        });
                 });
 
             modelBuilder.Entity("Ecom.Core.Entities.Product.Product", b =>
@@ -90,13 +98,11 @@ namespace Ecom.Infrastucture.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -120,29 +126,22 @@ namespace Ecom.Infrastucture.Migrations
 
             modelBuilder.Entity("Ecom.Core.Entities.Product.Photo", b =>
                 {
-                    b.HasOne("Ecom.Core.Entities.Product.Product", "Product")
+                    b.HasOne("Ecom.Core.Entities.Product.Product", null)
                         .WithMany("Photos")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Ecom.Core.Entities.Product.Product", b =>
                 {
                     b.HasOne("Ecom.Core.Entities.Product.Category", "Category")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("Ecom.Core.Entities.Product.Category", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Ecom.Core.Entities.Product.Product", b =>

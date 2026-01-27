@@ -1,4 +1,7 @@
+using AutoMapper;
+using Ecom.Api.Mapping;
 using Ecom.Infrastucture;
+using Microsoft.Extensions.DependencyInjection;
 namespace Ecom.Api
 {
     public static class Program
@@ -10,17 +13,25 @@ namespace Ecom.Api
             // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
             builder.Services.InfrasturctureConfiguration(builder.Configuration);
+            builder.Services.AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<CategoryMapping>();
+                cfg.AddProfile<ProductMapping>();
+            });
+
 
             var app = builder.Build();
+            app.UseStaticFiles();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseHttpsRedirection();

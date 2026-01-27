@@ -2,6 +2,7 @@
 
 namespace Ecom.Core.Interfaces
 {
+    // CRUD Operation
     public interface IGenericRepository<T> where T : class
     {
         Task<IReadOnlyList<T>> GetAllAsync();

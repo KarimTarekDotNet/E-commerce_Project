@@ -5,7 +5,7 @@
 namespace Ecom.Infrastucture.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,8 +30,8 @@ namespace Ecom.Infrastucture.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -75,6 +75,11 @@ namespace Ecom.Infrastucture.Migrations
                 table: "Products",
                 columns: new[] { "Id", "CategoryId", "Description", "Name", "Price" },
                 values: new object[] { 1, 1, "This is a sample product description.", "Sample Product 1", 19.99m });
+
+            migrationBuilder.InsertData(
+                table: "Photos",
+                columns: new[] { "Id", "ImageName", "ProductId" },
+                values: new object[] { 3, "test", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_ProductId",

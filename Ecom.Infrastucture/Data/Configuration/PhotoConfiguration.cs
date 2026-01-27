@@ -11,6 +11,7 @@ namespace Ecom.Infrastucture.Data.Configuration
             builder.ToTable("Photos");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.ImageName).IsRequired().HasMaxLength(100);
+            builder.HasData(new Photo { Id = 3, ImageName = "test", ProductId = 1 });
         }
     }
 }

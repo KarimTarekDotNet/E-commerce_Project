@@ -10,27 +10,19 @@ namespace Ecom.Infrastucture.Data.Configuration
         {
             builder.ToTable("Products");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
-            builder.Property(x => x.Description).IsRequired().HasMaxLength(255);
-            builder.Property(x => x.Price).IsRequired().HasColumnType("decimal(18,2)");
-
-            builder.HasOne(p => p.Category)
-                   .WithMany(c => c.Products)
-                   .HasForeignKey(p => p.CategoryId)
-                   .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasMany(p => p.Photos)
-                   .WithOne(ph => ph.Product)
-                   .HasForeignKey(ph => ph.ProductId)
-                   .OnDelete(DeleteBehavior.Cascade);
+            builder.Property(x => x.Name).IsRequired();
+            builder.Property(x => x.Description).IsRequired();
+            builder.Property(x => x.NewPrice).HasColumnType("decimal(18,2)").IsRequired();
+            builder.Property(x => x.OldPrice).HasColumnType("decimal(18,2)").IsRequired();
 
             builder.HasData(new Product
                 {
                     Id = 1,
                     Name = "Sample Product 1",
                     Description = "This is a sample product description.",
-                    Price = 19.99m,
-                    CategoryId = 1,
+                    OldPrice = 19.99m,
+                    NewPrice = 15.50m,
+                    CategoryId = 1
                 });
         }
     }
