@@ -1,0 +1,31 @@
+# Build results
+bin/
+obj/
+
+# IDEs
+.vs/
+.vscode/
+.idea/
+
+# User-specific
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# App settings
+appsettings.Development.json
+appsettings.Local.json
+
+# Logs
+*.log
+logs/
+
+# Database
+*.mdf
+*.ldf
+*.sqlite
+
+# OS
+Thumbs.db
+.DS_Store
