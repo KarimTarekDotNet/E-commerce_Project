@@ -1,5 +1,6 @@
 using AutoMapper;
 using Ecom.Api.Mapping;
+using Ecom.Api.Middleware;
 using Ecom.Infrastucture;
 using Microsoft.Extensions.DependencyInjection;
 namespace Ecom.Api
@@ -11,7 +12,7 @@ namespace Ecom.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
+            builder.Services.AddMemoryCache();
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -33,11 +34,13 @@ namespace Ecom.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseMiddleware<ExceptionMiddleware>();
+
+            app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

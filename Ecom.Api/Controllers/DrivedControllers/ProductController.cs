@@ -77,7 +77,7 @@ namespace Ecom.Api.Controllers.DrivedControllers
             }
         }
         [HttpDelete("Delete-Product/{Id}")]
-        public async Task<IActionResult> delete(int Id)
+        public async Task<IActionResult> Delete(int Id)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace Ecom.Api.Controllers.DrivedControllers
 
                 await work.ProductRepository.DeleteAsync(product);
 
-                return Ok(new ResponseAPI(200));
+                return Ok(new ResponseAPI(200, "Product Has Been Deleted"));
 
             }
             catch (Exception ex)
